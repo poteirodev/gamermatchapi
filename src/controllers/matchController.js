@@ -6,15 +6,12 @@ exports.getAll = (req, res) => {
 
   const { q, active } = req.query;
 
-  // búsqueda
   if (q) {
     result = result.filter(m =>
-      m.game.toLowerCase()
-      .includes(q.toLowerCase())
+      m.game.toLowerCase().includes(q.toLowerCase())
     );
   }
 
-  // filtro
   if (active) {
     result = result.filter(
       m => m.active.toString() === active
@@ -43,25 +40,10 @@ exports.create = (req, res) => {
 
   const { id, game, players, active } = req.body;
 
-  // validación
   if (!game) {
     return res.status(400).json({
       message: "game es obligatorio"
     });
-  }
-
-  // verificar ID repetido
-  if (id) {
-
-    const existingMatch = matches.find(
-      m => m.id == id
-    );
-
-    if (existingMatch) {
-      return res.status(400).json({
-        message: "El ID ya existe"
-      });
-    }
   }
 
   const newMatch = {

@@ -1,22 +1,31 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
+const matchRoutes = require("./routes/matchRoutes");
+
+const { swaggerUi, specs } = require("./swagger");
+
+app.use(cors());
+
 app.use(express.json());
 
-const matchRoutes = require(
-  "./routes/matchRoutes"
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs)
 );
+
+app.use("/api/matches", matchRoutes);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "API de partidas funcionando"
+    message: "API funcionando"
   });
 });
-
-app.use("/api/matches", matchRoutes);
 
 const PORT = process.env.PORT || 3000;
 

@@ -16,12 +16,6 @@ let matches = [
     game: "FIFA 26",
     players: 2,
     active: false
-  },
-  {
-    id: 4,
-    game: "Fortnite",
-    players: 4,
-    active: true
   }
 ];
 

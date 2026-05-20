@@ -2,18 +2,67 @@ const express = require("express");
 
 const router = express.Router();
 
-const controller = require(
-  "../controllers/matchController"
-);
+const {
+  getAll,
+  getById,
+  create,
+  update,
+  remove
+} = require("../controllers/matchController");
 
-router.get("/", controller.getAll);
+/**
+ * @swagger
+ * /api/matches:
+ *   get:
+ *     summary: Obtener partidas
+ *     responses:
+ *       200:
+ *         description: Lista de partidas
+ */
+router.get("/", getAll);
 
-router.get("/:id", controller.getById);
+/**
+ * @swagger
+ * /api/matches/{id}:
+ *   get:
+ *     summary: Obtener partida por ID
+ *     responses:
+ *       200:
+ *         description: Partida encontrada
+ */
+router.get("/:id", getById);
 
-router.post("/", controller.create);
+/**
+ * @swagger
+ * /api/matches:
+ *   post:
+ *     summary: Crear partida
+ *     responses:
+ *       201:
+ *         description: Partida creada
+ */
+router.post("/", create);
 
-router.put("/:id", controller.update);
+/**
+ * @swagger
+ * /api/matches/{id}:
+ *   put:
+ *     summary: Actualizar partida
+ *     responses:
+ *       200:
+ *         description: Partida actualizada
+ */
+router.put("/:id", update);
 
-router.delete("/:id", controller.remove);
+/**
+ * @swagger
+ * /api/matches/{id}:
+ *   delete:
+ *     summary: Eliminar partida
+ *     responses:
+ *       200:
+ *         description: Partida eliminada
+ */
+router.delete("/:id", remove);
 
 module.exports = router;
